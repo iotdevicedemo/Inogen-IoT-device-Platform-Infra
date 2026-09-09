@@ -1,17 +1,22 @@
-name: Terraform DEV
+name: Terraform DEV Runner Test
 
 on:
   workflow_dispatch:
 
 jobs:
-  terraform:
+  runner-test:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-      - name: Terraform Version
-        run: terraform version
+      - name: Verify runner and Terraform
+        run: |
+          echo "GitHub-hosted runner is working"
+          echo "Runner OS: $RUNNER_OS"
+          echo "Runner name: $RUNNER_NAME"
+          terraform version
